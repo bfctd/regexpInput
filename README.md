@@ -30,23 +30,23 @@ let list = [
     el: '.phone.p', // 【必填】只能是NODE的子元素，只能是类名或id名，类名需与其他不相同。
     event: 'blur', // 【必填】只能是jQ支持的事件名遵循jQ事件规则。
     role: 'phone', // 【二选一】匹配规则关键字[phone匹配手机号|code匹配6位验证码|icord匹配身份证号|email邮箱|mast必填项|int整数]
-    text: '您输入的不符合',
-    show: "bottom"
-  },
-  {el: '.code', event: 'blur', role: 'code', text: '请正确输入验证码'}
+    regexp: '/^1$/' //【二选一】regexp和role只能出现一个，regexp为自定义的正则字符串
+    show: "bottom", //【非必填】错误提示显示的位置，默认值为border
+    text: '输入的不正确' //【非必填】提示文本，位置为bottom时有效，默认 “输入的不正确”
+  }
 ]
 
 ```
-### new一个实例化对象并且配置参数
+## 点击提交按钮 需要验证字段中是否有无不匹配
 ```
-    new LoadingImgDelay({
-        imgSrcList: imgSrc, // 真实图片列表数组,
-        imgClassOrNodeName: 'img', // 要懒加载的图片标签名或class值，默认是img标签
-        srcNameString: 'data-src' // 存储真实图片的data-*，默认是'data-src'
+    //点击提交按钮需要验证 字段中是否有无不匹配
+    例子：
+    $('button').on('click', () => {
+        var canAcc = ($(".from").formRuleTest({set: list, allTest: true}))
+        if (canAcc) {
+            //ajax
+        }
     })
 ```
 
-# 注
-### 1、所有图片默认的图为数组第一项
-### 2、真实图片列表和所对应的img不对应，则不会更改
 
